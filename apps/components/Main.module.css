@@ -1,0 +1,10 @@
+.main{
+  max-width: 1000px;
+  width: 80%;
+  padding:0 10px 20px 10px;
+  position: absolute;
+  top: 50px
+}
+.height {
+  height: 50px;
+}

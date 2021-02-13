@@ -9,6 +9,7 @@ export default function Home() {
       <Head>
         <title>Calender App</title>
       </Head>
+      <h1>カレンダーでスケジュール管理！</h1>
       <Main />
     </div>
   )

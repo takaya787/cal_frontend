@@ -54,7 +54,7 @@ export function UserForm() {
         //Login関連の処理 context使用
         Auth.login(data.token);
         const user_data = data.user
-        setUser({ email: user_data.email, id: user_data.id, name: user_data.name });
+        setUser({ id: user_data.id, email: user_data.email, name: user_data.name });
         //Login関連の処理 終了
         resetError();
         // mutate(baseUrl);

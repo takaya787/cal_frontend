@@ -12,7 +12,7 @@ export default function Home() {
       </Head>
       <h1>カレンダーでスケジュール管理！</h1>
       <Main />
-      <UserForm />
+      {/* <UserForm /> */}
     </div>
   )
 }

@@ -14,6 +14,7 @@ const endpoint = process.env.API_ENDPOINT + 'users'
 
 export function UserForm() {
   const router = useRouter();
+
   const { register, handleSubmit, formstate } = useForm();
   const initialerrors = { name: '', email: '', password: '', password_confirmation: '' };
 

@@ -5,6 +5,7 @@ import styles from './Main.module.css'
 //components
 import { EventFrom } from './Forms/EventForm'
 
+
 export const Main = () => {
   //react-calendar用のstate
   const [value, onChange] = useState(new Date());
@@ -31,8 +32,8 @@ export const Main = () => {
         className={styles.main}
         onChange={onChange}
         onClickDay={(value, event) => {
-          console.log('Clicked Day:', value)
           setIsEventForm(true);
+          // console.log(process.env.API_ENDPOINT)
         }}
         tileClassName={styles.height}
         // tileContent={({ date, view }) => setTileContent(date, view)}

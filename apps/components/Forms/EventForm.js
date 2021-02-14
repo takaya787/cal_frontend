@@ -34,10 +34,40 @@ export const EventFrom = (props) => {
     //   });
   }
   //target_dateにはDate Objecy
+  //曜日を作成
+  const day_label = (target_date) => {
+    let day = ''
+    switch (target_date.getDay()) {
+      case 0:
+        day = '(日)'
+        break
+      case 1:
+        day = '(月)'
+        break;
+      case 2:
+        day = '(火)'
+        break;
+      case 3:
+        day = '(水)'
+        break;
+      case 4:
+        day = '(木)'
+        break;
+      case 5:
+        day = '(金)'
+        break;
+      default:
+        day = '(土)'
+    }
+    return (<>{day}</>)
+  }
+
+  //target_dateにはDate Objecy
+  //getMonth()は0~11なので、+1必要
   const date_label = (target_date) => {
     return (
       <>
-        登録日： { props.date.getFullYear()}年 { props.date.getMonth()}月 { props.date.getDate()}日
+        登録日： { target_date.getFullYear()}年 { target_date.getMonth() + 1}月{ target_date.getDate()}日
       </>
     )
   }
@@ -50,7 +80,8 @@ export const EventFrom = (props) => {
       >
         <button className={styles.button} onClick={() => { props.setIsEventForm(false) }}>✕</button>
         <h3 className={styles.form_title}>予定を登録</h3>
-        <label className={styles.form_label}>{date_label(props.date)}</label>
+        <label className={styles.form_label}>  {date_label(props.date)} {day_label(props.date)}
+        </label>
         <label className={styles.form_label} htmlFor="title">タイトル<span className="required">＊必須</span></label>
         <input type="input" name="title" id="title"
           className={styles.form_input}

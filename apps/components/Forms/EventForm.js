@@ -1,37 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './EventForm.module.css'
-
+import Auth from '../../modules/auth'
 //propsでdateを受け取る予定
+const endpoint = process.env.API_ENDPOINT + 'events'
+
 export const EventFrom = (props) => {
   const { register, handleSubmit, formstate } = useForm();
 
   const onSubmit = (value) => {
-    console.log(value);
-    console.log(props.date);
-    //form閉じる
-    props.setIsEventForm(false)
-    // fetch(baseUrl, {
-    //   method: 'POST', // or 'PUT'
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': `Bearer ${Auth.getToken()}`
-    //   },
-    //   body: JSON.stringify({
-    //     event: {
-    //       title: value.title,
-    //       memo: value.memo,
-    //     },
-    //     date: props.date,
-    //   }),
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error:', error);
-    //   });
+    // console.log(value);
+    // console.log(props.date);
+    fetch(endpoint, {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${Auth.getToken()}`
+      },
+      body: JSON.stringify({
+        event: {
+          title: value.title,
+          memo: value.memo,
+          //日付が一日ずれるので + 1しないといけない
+          date: props.date + 1,
+        },
+      }),
+    })
+      //まだresponseを表示する実装しかしていない
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        //送信後にformを閉じる
+        props.setIsEventForm(false)
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   }
   //target_dateにはDate Objecy
   //曜日を作成

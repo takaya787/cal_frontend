@@ -1,0 +1,47 @@
+.form {
+  width: 80%;
+  margin-left:auto;
+  margin-right: auto;
+  text-align: left;
+}
+.form_input {
+    display: block;
+    margin: 0 auto 5px;
+    height: 34px;
+    width: 100%;
+    line-height: 18px;
+    padding: 3px;
+}
+.form_error {
+  display: block;
+  padding: 5px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border-radius: 5px;
+}
+.form_submit {
+  display: block;
+  width: 90%;
+  cursor: pointer;
+  margin: 10px auto 20px;
+  background-color: red;
+  height: 30px;
+  padding: 3px auto;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  opacity: 1.0;
+}
+.form_submit:hover {
+  opacity: 0.4;
+}
+.form_submit:focus {
+  outline: none;
+}
+.label {
+  display: block;
+  color:black;
+  font-size: 13px;
+  line-height: 18px;
+  margin: 5px 0;
+}

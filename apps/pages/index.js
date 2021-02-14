@@ -2,6 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 //components
 import { Main } from '../components/Main'
+import { UserForm } from '../components/Forms/UserForm'
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       </Head>
       <h1>カレンダーでスケジュール管理！</h1>
       <Main />
+      <UserForm />
     </div>
   )
 }

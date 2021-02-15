@@ -9,7 +9,7 @@ import { EventFrom } from './Forms/EventForm'
 export const Main = () => {
   //react-calendar用のstate
   const [value, onChange] = useState(new Date());
-  const [activeStartDate, setActiveStartDate] = useState(new Date());
+  const [activeDate, setActiveDate] = useState(new Date());
   //EventForm用のstate
   const [isEventForm, setIsEventForm] = useState(false);
 
@@ -25,7 +25,7 @@ export const Main = () => {
         onClickDay={(value, event) => {
           setIsEventForm(true);
         }}
-        onActiveStartDateChange={({ activeStartDate, value, view }) => setActiveStartDate(activeStartDate)}
+        onActiveStartDateChange={({ activeStartDate, value, view }) => setActiveDate(activeStartDate)}
         tileClassName={styles.height}
         // tileContent={({ date, view }) => setTileContent(date, view)}
 

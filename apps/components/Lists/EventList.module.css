@@ -1,0 +1,30 @@
+.eventlist {
+  display: inline-block;
+  width: 90%;
+  margin-right: 10%;
+  height: 250px;
+  border: 1px solid brown;
+  border-radius: 10px;
+}
+
+.title {
+  text-align: center;
+}
+.lists {
+  height: 200px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  overflow: scroll;
+  flex-direction: column;
+  list-style: none;
+}
+.list_each {
+  height: 30px;
+  font-size: 20px;
+  padding-left: 20px;
+  margin: 10px 15%;
+  border-left: 3px solid skyblue;
+  border-bottom: 1px solid wheat;
+  border-radius: 5px;
+}

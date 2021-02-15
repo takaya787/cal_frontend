@@ -5,6 +5,7 @@ import Auth from '../../modules/auth'
 //propsでdateを受け取る予定
 const endpoint = process.env.API_ENDPOINT + 'events'
 
+//props {date: date, setIsEventForm(bool): void}
 export const EventFrom = (props) => {
   const { register, handleSubmit, formstate } = useForm();
 

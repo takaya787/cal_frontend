@@ -9,22 +9,13 @@ import { EventFrom } from './Forms/EventForm'
 export const Main = () => {
   //react-calendar用のstate
   const [value, onChange] = useState(new Date());
+  const [activeStartDate, setActiveStartDate] = useState(new Date());
   //EventForm用のstate
   const [isEventForm, setIsEventForm] = useState(false);
 
   const today = new Date();
-  const setTileContent = (date, view) => {
-    if (view === 'month' && date.getDay() === 0) {
-      return (<>It's Sunday!</>)
-    } else if (view === 'month' && date.getDay() === 1) {
-      return (<>Start monday tt</>)
-    } else if (view === 'month' && date.getMonth() === today.getMonth() && date.getDate() === today.getDate()) {
-      return (<>todos</>)
-    }
-    else {
-      null
-    }
-  }
+
+
 
   return (
     <>
@@ -33,8 +24,8 @@ export const Main = () => {
         onChange={onChange}
         onClickDay={(value, event) => {
           setIsEventForm(true);
-          // console.log(process.env.API_ENDPOINT)
         }}
+        onActiveStartDateChange={({ activeStartDate, value, view }) => setActiveStartDate(activeStartDate)}
         tileClassName={styles.height}
         // tileContent={({ date, view }) => setTileContent(date, view)}
 
@@ -42,6 +33,8 @@ export const Main = () => {
         showNeighboringMonth={false}
         minDate={new Date(2000, 1, 1)}
         maxDate={new Date(2100, 1, 1)}
+        // locale={"ja-JP"}
+        view={"month"}
       />
       {isEventForm && (
         <EventFrom date={value} setIsEventForm={setIsEventForm} />

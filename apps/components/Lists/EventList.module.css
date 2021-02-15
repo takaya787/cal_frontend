@@ -2,20 +2,24 @@
   display: inline-block;
   width: 90%;
   margin-right: 10%;
-  height: 250px;
+  height: 200px;
   border: 1px solid brown;
   border-radius: 10px;
+  overflow-y: scroll;
+  position: relative;
 }
 
 .title {
   text-align: center;
 }
+.list_board {
+  overflow-y: scroll;
+}
 .lists {
-  height: 200px;
+  height: 250px;
   padding: 0;
   margin: 0;
   display: flex;
-  overflow: scroll;
   flex-direction: column;
   list-style: none;
 }

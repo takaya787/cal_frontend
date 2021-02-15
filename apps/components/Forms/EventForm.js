@@ -23,7 +23,9 @@ export const EventFrom = (props) => {
           title: value.title,
           memo: value.memo,
           //日付が一日ずれるので + 1しないといけない
-          date: props.date + 1,
+          year: props.date.getFullYear(),
+          month: props.date.getMonth() + 1,
+          date: props.date.getDate(),
         },
       }),
     })

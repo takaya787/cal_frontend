@@ -73,9 +73,6 @@ function MyApp({ Component, pageProps }) {
     }).then(res => res.json())
       .then(data => {
         console.log(data);
-        // data.events.map((event) => {
-        //   return event.date === new Date(event.date)
-        // })
         setEvents(data.events);
       })
   }, [user])

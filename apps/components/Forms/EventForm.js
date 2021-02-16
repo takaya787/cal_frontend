@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+//others
+import { EventsContext } from '../../pages/_app'
 import styles from './EventForm.module.css'
 import Auth from '../../modules/auth'
-//propsでdateを受け取る予定
+
 const endpoint = process.env.API_ENDPOINT + 'events'
 
 //props {date: date, setIsEventForm(bool): void}
 export const EventFrom = (props) => {
-  const { register, handleSubmit, formstate } = useForm();
+  const { register, handleSubmit } = useForm();
+  const { events, setEvents } = useContext(EventsContext);
 
   const onSubmit = (value) => {
     // console.log(value);
@@ -29,10 +32,18 @@ export const EventFrom = (props) => {
         },
       }),
     })
-      //まだresponseを表示する実装しかしていない
       .then(response => response.json())
       .then(data => {
         console.log(data);
+
+        //送信したevents情報を追加した配列を作成
+        let new_events = events
+        new_events.push(data)
+        console.log('-----------')
+        console.log(new_events)
+        //作成したevents配列に変更
+        setEvents(new_events)
+
         //送信後にformを閉じる
         props.setIsEventForm(false)
       })

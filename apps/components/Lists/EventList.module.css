@@ -30,7 +30,7 @@
   padding: 10px 10%;
   /* margin: 10px 15%; */
   border-bottom: 1px solid wheat;
-  overflow-x: hidden;
+  overflow: scroll;
 }
 .list_date {
   margin-right: 20px;

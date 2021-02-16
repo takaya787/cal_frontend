@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Calender from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import styles from './Main.module.css'
 //components
 import { EventFrom } from './Forms/EventForm'
 import { EventList } from './Lists/EventList'
+//others
+import { EventsContext } from '../pages/_app'
 
 export const Main = () => {
   //react-calendar用のstate
@@ -12,10 +14,8 @@ export const Main = () => {
   const [activeDate, setActiveDate] = useState(new Date());
   //EventForm用のstate
   const [isEventForm, setIsEventForm] = useState(false);
-
-  const today = new Date();
-
-
+  //Events情報を管理する
+  const { events } = useContext(EventsContext)
 
   return (
     <>
@@ -41,7 +41,7 @@ export const Main = () => {
       )}
       <div className={styles.board}>
         <div className={styles.left}>
-          <EventList activeDate={activeDate} />
+          <EventList activeDate={activeDate} events={events} />
         </div>
       </div>
     </>

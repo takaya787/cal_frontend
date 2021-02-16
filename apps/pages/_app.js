@@ -52,13 +52,6 @@ function MyApp({ Component, pageProps }) {
     }
   }, []) // [] => changed to => [user]
 
-  // const Eventsfetcher = () => fetch(EventsUrl, {
-  //   method: 'GET',
-  //   headers: {
-  //     'Authentication': `Bearer ${Auth.getToken()}`
-  //   }
-  // }).then(res => res.json());
-
   //loginしていればそのユーザーのeventsを取得
   useEffect(function getEvents() {
     //Loginしていなければeventsは無し

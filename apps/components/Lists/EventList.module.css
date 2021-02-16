@@ -35,3 +35,7 @@
 .list_date {
   margin-right: 20px;
 }
+.past {
+  opacity: 0.4;
+  background-color: wheat;
+}

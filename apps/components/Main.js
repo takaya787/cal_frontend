@@ -4,7 +4,7 @@ import 'react-calendar/dist/Calendar.css'
 import styles from './Main.module.css'
 //components
 import { EventFrom } from './Forms/EventForm'
-
+import { EventList } from './Lists/EventList'
 
 export const Main = () => {
   //react-calendar用のstate
@@ -39,6 +39,11 @@ export const Main = () => {
       {isEventForm && (
         <EventFrom date={value} setIsEventForm={setIsEventForm} />
       )}
+      <div className={styles.board}>
+        <div className={styles.left}>
+          <EventList activeDate={activeDate} />
+        </div>
+      </div>
     </>
   );
 }

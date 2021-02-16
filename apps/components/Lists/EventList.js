@@ -14,14 +14,16 @@ export const EventList = (props) => {
   }, [events])
 
   return (
-    <div className={styles.eventlist}>
-      <h3 className={styles.title}>Event一覧</h3>
-      <ul className={styles.lists}>
-        {actualEvents.map(event => (
-          <li key={event.id} className={styles.list_each}>{event.title}</li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <h3 className={styles.title}>予定一覧　{props.activeDate.getFullYear()}年 {props.activeDate.getMonth() + 1}月 </h3>
+      <div className={styles.eventlist}>
+        <ul className={styles.lists}>
+          {actualEvents.map(event => (
+            <li key={event.id} className={styles.list_each}>{event.title}</li>
+          ))}
+        </ul>
+      </div>
+    </>
   )
 
 }

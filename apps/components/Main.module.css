@@ -7,3 +7,19 @@
 .height {
   height: 30px;
 }
+/* ここからはeventlist, todolist用のcss */
+.board {
+  max-width: 1000px;
+  width: 80%;
+  margin: 20px auto 0;
+  height: 250px;
+  display: block;
+}
+.left {
+  text-align: left;
+  width: 50%;
+}
+.right {
+  text-align: right;
+  width: 50%;
+}

@@ -4,7 +4,6 @@ import styles from '../styles/Home.module.css'
 //components
 import { Main } from '../components/Main'
 import { Modal } from '../components/Modal'
-import { EventList } from '../components/Lists/EventList'
 //others
 import Auth from '../modules/auth'
 import { UserContext } from './_app'
@@ -33,12 +32,6 @@ export default function Home() {
         </>
       )}
       <Main />
-      <div className={styles.board}>
-        <div className={styles.left}>
-          <EventList />
-        </div>
-      </div>
-
     </div>
   )
 }

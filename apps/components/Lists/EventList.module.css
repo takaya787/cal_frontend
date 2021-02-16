@@ -16,7 +16,7 @@
   overflow-y: scroll;
 }
 .lists {
-  height: 250px;
+  height: auto;
   padding: 0;
   margin: 0;
   display: flex;
@@ -24,11 +24,14 @@
   list-style: none;
 }
 .list_each {
-  height: 30px;
-  font-size: 20px;
-  padding-left: 20px;
-  margin: 10px 15%;
-  border-left: 3px solid skyblue;
+  height: 45px;
+  font-size: 16px;
+  padding-left: 5px;
+  padding: 10px 10%;
+  /* margin: 10px 15%; */
   border-bottom: 1px solid wheat;
-  border-radius: 5px;
+  overflow-x: hidden;
+}
+.list_date {
+  margin-right: 20px;
 }

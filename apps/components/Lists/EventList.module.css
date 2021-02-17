@@ -2,7 +2,7 @@
   display: inline-block;
   width: 90%;
   margin-right: 10%;
-  height: 200px;
+  height: 300px;
   border: 1px solid brown;
   border-radius: 10px;
   overflow-y: scroll;
@@ -24,18 +24,38 @@
   list-style: none;
 }
 .list_each {
-  height: 45px;
+  height: 75px;
   font-size: 16px;
   padding-left: 5px;
   padding: 10px 10%;
   /* margin: 10px 15%; */
-  border-bottom: 1px solid wheat;
+  border-bottom: 1px solid black;
   overflow: scroll;
 }
 .list_date {
   margin-right: 20px;
 }
+.list_switch {
+  background-color: red;
+  border: solid 1px wheat;
+  border-radius: 10px;
+  color: white;
+  opacity: 0.6;
+}
+.list_switch:focus{
+  outline: none;
+}
+.list_switch:hover{
+  opacity: 1.0;
+}
+.memo_title {
+  margin-top: 20px;
+}
+
 .past {
   opacity: 0.4;
   background-color: wheat;
+}
+.longer {
+  height: 140px;
 }

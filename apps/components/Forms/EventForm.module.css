@@ -9,6 +9,23 @@
   position: relative;
   text-align: left;
 }
+.switch {
+  background-color: red;
+  border: solid 1px wheat;
+  border-radius: 10px;
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 50px;
+  opacity: 0.6;
+}
+.switch:focus{
+  outline: none;
+}
+.switch:hover {
+  opacity: 1.0;
+  text-decoration: underline;
+}
 .button {
   background-color: #f3f3f3;
   border: none;
@@ -44,10 +61,25 @@
   margin: 5px 0
 }
 .form_submit {
-  cursor: pointer;
-  text-align: left;
   margin-top: 10px;
-  margin-bottom: 0;
+  margin-bottom: 5px;
+  display       : inline-block;
+  border-radius : 5%;          /* 角丸       */
+  font-size     : 12pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 6px;   /* 余白       */
+  background    : #000066;     /* 背景色     */
+  color         : #ffffff;     /* 文字色     */
+  line-height   : 12px;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+  box-shadow    : 4px 4px 2px #666666;  /* 影の設定 */
+  border        : 2px solid #000066;    /* 枠の　*/
+}
+.form_submit:hover{
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #000066;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
 }
 .form_input {
   padding: 5px;

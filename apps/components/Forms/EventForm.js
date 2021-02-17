@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 //others
 import { EventsContext } from '../../pages/_app'
@@ -9,10 +9,14 @@ const endpoint = process.env.API_ENDPOINT + 'events'
 
 //props {date: date, setIsEventForm(bool): void}
 export const EventFrom = (props) => {
+
+  //始めは、ここをtrueにして、eventformを表示する
+  const [defaultEvent, setDefaultEvent] = useState(true);
+
   const { register, handleSubmit } = useForm();
   const { events, setEvents } = useContext(EventsContext);
 
-  const onSubmit = (value) => {
+  const EventSubmit = (value) => {
     // console.log(value);
     // console.log(props.date);
     fetch(endpoint, {
@@ -92,25 +96,52 @@ export const EventFrom = (props) => {
 
   return (
     <div className={styles.draft}>
-      <form
-        className={styles.form}
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <button className={styles.button} onClick={() => { props.setIsEventForm(false) }}>✕</button>
-        <h3 className={styles.form_title}>予定を登録</h3>
-        <label className={styles.form_label}>  {date_label(props.date)} {day_label(props.date)}
-        </label>
-        <label className={styles.form_label} htmlFor="title">タイトル<span className="required">＊必須</span></label>
-        <input type="input" name="title" id="title"
-          className={styles.form_input}
-          ref={register({ required: 'タイトルは必須です' })}
-        />
+      {/* trueならevent送信form */}
+      {defaultEvent && (
+        <form
+          className={styles.form}
+          onSubmit={handleSubmit(EventSubmit)}
+        >
+          <button className={styles.switch} onClick={() => { setDefaultEvent(false) }}>タスクを作成</button>
+          <button className={styles.button} onClick={() => { props.setIsEventForm(false) }}>✕</button>
+          <h3 className={styles.form_title}>予定を登録</h3>
+          <label className={styles.form_label}>  {date_label(props.date)} {day_label(props.date)}
+          </label>
+          <label className={styles.form_label} htmlFor="title">タイトル<span className="required">＊必須</span></label>
+          <input type="input" name="title" id="title"
+            className={styles.form_input}
+            ref={register({ required: 'タイトルは必須です' })}
+          />
 
-        <label htmlFor="memo" className={styles.form_label}>メモ</label>
-        <textarea name="memo" id="memo" className={`${styles.form_input} ${styles.textarea}`} ref={register()} placeholder="メモはご自由に入力してください" />
+          <label htmlFor="memo" className={styles.form_label}>メモ</label>
+          <textarea name="memo" id="memo" className={`${styles.form_input} ${styles.textarea}`} ref={register()} placeholder="メモはご自由に入力してください" />
 
-        <input type="submit" value="予定を送信" className={styles.form_submit} />
-      </form>
+          <input type="submit" value="予定を送信" className={styles.form_submit} />
+        </form>
+      )}
+      {!defaultEvent && (
+        <form
+          className={styles.form}
+          onSubmit={handleSubmit(EventSubmit)}
+        >
+          <button className={styles.switch} onClick={() => { setDefaultEvent(true) }}>予定を登録</button>
+          <button className={styles.button} onClick={() => { props.setIsEventForm(false) }}>✕</button>
+          <h3 className={styles.form_title}>タスクを作成</h3>
+          <label className={styles.form_label}>  {date_label(props.date)} {day_label(props.date)}
+          </label>
+          <label className={styles.form_label} htmlFor="title">タイトル<span className="required">＊必須</span></label>
+          <input type="input" name="title" id="title"
+            className={styles.form_input}
+            ref={register({ required: 'タイトルは必須です' })}
+          />
+
+          <label htmlFor="memo" className={styles.form_label}>メモ</label>
+          <textarea name="memo" id="memo" className={`${styles.form_input} ${styles.textarea}`} ref={register()} placeholder="メモはご自由に入力してください" />
+
+          <input type="submit" value="タスクを作成" className={styles.form_submit} />
+        </form>
+      )}
+
     </div>
   )
 }

@@ -2,7 +2,8 @@ import React, { useState, useEffect, useContext } from 'react'
 import styles from './EventList.module.css'
 //others
 import { EventsContext } from '../../pages/_app'
-
+//components
+import { EachList } from './EachList'
 
 //props {activeDate: date,}
 export const EventList = (props) => {
@@ -22,17 +23,17 @@ export const EventList = (props) => {
     const today_year = today.getFullYear()
     //yearが小さい　過去
     if (today_year > target_year) {
-      return `${styles.list_each} ${styles.past}`
+      return `${styles.past}`
     }
     //yearが同じでもmonthが小さい　過去
     else if (today_year === target_year && today_month > target_month) {
-      return `${styles.list_each} ${styles.past}`
+      return `${styles.past}`
     }
     //year,month同じでもdateが小さい　過去
     else if (today_year === target_year && today_month >= target_month) {
-      return today_date > target_date ? `${styles.list_each} ${styles.past}` : styles.list_each
+      return today_date > target_date ? ` ${styles.past}` : 'normal'
     } else {
-      return styles.list_each
+      return 'normal'
     }
   }
 
@@ -50,7 +51,7 @@ export const EventList = (props) => {
       <div className={styles.eventlist}>
         <ul className={styles.lists}>
           {actualEvents.map(event => (
-            <li key={event.id} className={list_class(today, event.date, event.month, event.year)}><span className={styles.list_date}>{event.date}日</span>{event.title} </li>
+            <li key={event.id} className={list_class(today, event.date, event.month, event.year)}><EachList date={event.date} title={event.title} memo={event.memo} /></li>
           ))}
         </ul>
       </div>

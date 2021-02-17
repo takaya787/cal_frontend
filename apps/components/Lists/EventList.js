@@ -4,13 +4,12 @@ import styles from './EventList.module.css'
 import { EventsContext } from '../../pages/_app'
 
 
-//props {activeDate: date}
+//props {activeDate: date,}
 export const EventList = (props) => {
-  //eventsはpropsで与える
-  const events = props.events
+  const { events } = useContext(EventsContext);
+
   //実際に表示するeventsを選定
   const [actualEvents, setActualEvents] = useState([])
-
   const active_year = props.activeDate.getFullYear()
   const active_month = props.activeDate.getMonth() + 1
 
@@ -36,8 +35,6 @@ export const EventList = (props) => {
       return styles.list_each
     }
   }
-
-
 
   //表示するeventsを決定
   useEffect(function () {

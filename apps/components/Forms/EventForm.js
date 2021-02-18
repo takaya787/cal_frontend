@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { mutate } from 'swr';
 //others
 import { EventsContext } from '../../pages/_app'
 import styles from './EventForm.module.css'
@@ -14,7 +15,7 @@ export const EventFrom = (props) => {
   const [defaultEvent, setDefaultEvent] = useState(true);
 
   const { register, handleSubmit } = useForm();
-  const { events, setEvents } = useContext(EventsContext);
+  const { EventsUrl } = useContext(EventsContext);
 
   const EventSubmit = (value) => {
     // console.log(value);
@@ -39,15 +40,8 @@ export const EventFrom = (props) => {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-
-        //送信したevents情報を追加した配列を作成
-        let new_events = events
-        new_events.push(data)
-        console.log('-----------')
-        console.log(new_events)
-        //作成したevents配列に変更
-        setEvents(new_events)
-
+        //swrによりeventsを更新
+        mutate(EventsUrl)
         //送信後にformを閉じる
         props.setIsEventForm(false)
       })

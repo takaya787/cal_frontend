@@ -1,9 +1,12 @@
 import '../styles/globals.css'
 import { useState, useEffect, createContext } from 'react';
 import Auth from '../modules/auth';
+//customhookをimport
+import { usetaskSWR, TaskUrl } from '../hooks/usetaskSWR'
 
 export const UserContext = createContext();
 export const EventsContext = createContext();
+export const TasksContext = createContext();
 
 //Login処理用のURL
 const LoginUrl = `${process.env.API_ENDPOINT}auto_login`
@@ -23,6 +26,12 @@ function MyApp({ Component, pageProps }) {
     events,
     setEvents,
   };
+
+  //tasks のvalueを定義
+  const { data, error } = usetaskSWR()
+  const Tasksvalue = {
+    data, error, TaskUrl
+  }
 
   //tokenがあれば自動login
   useEffect(function () {
@@ -73,7 +82,10 @@ function MyApp({ Component, pageProps }) {
   return (
     <UserContext.Provider value={Uservalue}>
       <EventsContext.Provider value={Eventsvalue}>
-        <Component {...pageProps} />
+        <TasksContext.Provider value={Tasksvalue}>
+          <Component {...pageProps} />
+        </TasksContext.Provider>
+
       </EventsContext.Provider>
     </UserContext.Provider>
   )

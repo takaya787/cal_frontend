@@ -7,7 +7,10 @@ import { EachList } from './EachList'
 
 //props {activeDate: date,}
 export const EventList = (props) => {
-  const { events } = useContext(EventsContext);
+  //APIから得られたdataの配列を取り出す必要はある
+  const { events_data } = useContext(EventsContext);
+  // const events = events_data["events"]
+
 
   //実際に表示するeventsを選定
   const [actualEvents, setActualEvents] = useState([])
@@ -39,11 +42,18 @@ export const EventList = (props) => {
 
   //表示するeventsを決定
   useEffect(function () {
+    //events_dataに値がセットされていなければ、return
+    // console.log('useEffect発火')
+    // console.log(events_data);
+    if (events_data === undefined) {
+      return
+    }
+    const events = events_data.events
     const filteredevents = events.filter((event) => {
       return (event.month === active_month && event.year === active_year)
     })
     setActualEvents(filteredevents)
-  }, [props.activeDate, events])
+  }, [props.activeDate, events_data])
 
   return (
     <>

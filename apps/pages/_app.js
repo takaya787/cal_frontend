@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import { useState, useEffect, createContext } from 'react';
 import Auth from '../modules/auth';
 //customhookをimport
+import { useEventsSWR, EventsUrl } from '../hooks/useEventsSWR'
 import { useTasksSWR, TasksUrl } from '../hooks/useTasksSWR'
 
 export const UserContext = createContext();
@@ -10,8 +11,6 @@ export const TasksContext = createContext();
 
 //Login処理用のURL
 const LoginUrl = `${process.env.API_ENDPOINT}auto_login`
-//Events取得用のURL
-const EventsUrl = `${process.env.API_ENDPOINT}events`
 
 function MyApp({ Component, pageProps }) {
   //ユーザー情報を取得する
@@ -21,16 +20,15 @@ function MyApp({ Component, pageProps }) {
     setUser,
   };
   //ユーザーの全てのeventを取得する
-  const [events, setEvents] = useState([])
+  const { events_data, event_errors } = useEventsSWR()
   const Eventsvalue = {
-    events,
-    setEvents,
+    events_data, event_errors, EventsUrl
   };
 
   //tasks のvalueを定義
-  const { tasks, task_errors } = useTasksSWR()
+  const { tasks_data, task_errors } = useTasksSWR()
   const Tasksvalue = {
-    tasks, task_errors, TasksUrl
+    tasks_data, task_errors, TasksUrl
   };
 
   //tokenがあれば自動login
@@ -62,22 +60,22 @@ function MyApp({ Component, pageProps }) {
   }, []) // [] => changed to => [user]
 
   //loginしていればそのユーザーのeventsを取得
-  useEffect(function getEvents() {
-    //Loginしていなければeventsは無し
-    if (!Auth.isLoggedIn() || user.id === 0) {
-      return setEvents([])
-    }
-    fetch(EventsUrl, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${Auth.getToken()}`
-      }
-    }).then(res => res.json())
-      .then(data => {
-        console.log(data);
-        setEvents(data.events);
-      })
-  }, [user])
+  // useEffect(function getEvents() {
+  //   //Loginしていなければeventsは無し
+  //   if (!Auth.isLoggedIn() || user.id === 0) {
+  //     return setEvents([])
+  //   }
+  //   fetch(EventsUrl, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Authorization': `Bearer ${Auth.getToken()}`
+  //     }
+  //   }).then(res => res.json())
+  //     .then(data => {
+  //       console.log(data);
+  //       setEvents(data.events);
+  //     })
+  // }, [user])
 
   return (
     <UserContext.Provider value={Uservalue}>

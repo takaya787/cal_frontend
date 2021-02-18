@@ -2,10 +2,10 @@ import useSWR from 'swr';
 //others
 import Auth from '../modules/auth'
 
-export const TasksUrl = `${process.env.API_ENDPOINT}tasks`
+export const EventsUrl = `${process.env.API_ENDPOINT}events`
 
 //SWR用のfetcher
-const Taskfetcher = () => fetch(TasksUrl, {
+const Eventfetcher = () => fetch(EventsUrl, {
   method: 'GET',
   headers: {
     'Authorization': `Bearer ${Auth.getToken()}`,
@@ -15,8 +15,8 @@ const Taskfetcher = () => fetch(TasksUrl, {
 
 // const fetcher = () => fetch(TasksUrl).then(res => res.json())
 
-export const useTasksSWR = () => {
-  const { data: tasks_data, error: task_errors } = useSWR(TasksUrl, Taskfetcher);
+export const useEventsSWR = () => {
+  const { data: events_data, error: event_errors } = useSWR(EventsUrl, Eventfetcher);
 
-  return { tasks_data, task_errors }
+  return { events_data, event_errors }
 }

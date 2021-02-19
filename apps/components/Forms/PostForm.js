@@ -3,13 +3,13 @@ import { useForm } from 'react-hook-form';
 import { mutate } from 'swr';
 //others
 import { EventsContext } from '../../pages/_app'
-import styles from './EventForm.module.css'
+import styles from './PostForm.module.css'
 import Auth from '../../modules/auth'
 
 const endpoint = process.env.API_ENDPOINT + 'events'
 
 //props {date: date, setIsEventForm(bool): void}
-export const EventFrom = (props) => {
+export const PostFrom = (props) => {
 
   //始めは、ここをtrueにして、eventformを表示する
   const [defaultEvent, setDefaultEvent] = useState(true);

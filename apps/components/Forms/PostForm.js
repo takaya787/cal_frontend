@@ -2,25 +2,31 @@ import React, { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { mutate } from 'swr';
 //others
-import { EventsContext } from '../../pages/_app'
+import { EventsContext, TasksContext } from '../../pages/_app'
 import styles from './PostForm.module.css'
 import Auth from '../../modules/auth'
 
-const endpoint = process.env.API_ENDPOINT + 'events'
+// const endpoint = process.env.API_ENDPOINT + 'events'
+
+// const taskpoint = process.env.API_ENDPOINT + 'tasks'
 
 //props {date: date, setIsEventForm(bool): void}
+//Event投稿と、Task投稿を分ける
 export const PostFrom = (props) => {
 
   //始めは、ここをtrueにして、eventformを表示する
   const [defaultEvent, setDefaultEvent] = useState(true);
 
   const { register, handleSubmit } = useForm();
+  //それぞれのエンドポイントを取得しておく
   const { EventsUrl } = useContext(EventsContext);
+  const { TasksUrl } = useContext(TasksContext);
 
+  //Event投稿関数
   const EventSubmit = (value) => {
     // console.log(value);
     // console.log(props.date);
-    fetch(endpoint, {
+    fetch(EventsUrl, {
       method: 'POST', // or 'PUT'
       headers: {
         'Content-Type': 'application/json',
@@ -49,6 +55,41 @@ export const PostFrom = (props) => {
         console.error('Error:', error);
       });
   }
+
+  //Task投稿関数
+  const TaskSubmit = (value) => {
+    // console.log(value);
+    // console.log(props.date);
+    fetch(TasksUrl, {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${Auth.getToken()}`
+      },
+      body: JSON.stringify({
+        task: {
+          title: value.title,
+          memo: value.memo,
+          //日付が一日ずれるので + 1しないといけない
+          year: props.date.getFullYear(),
+          month: props.date.getMonth() + 1,
+          date: props.date.getDate(),
+        },
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        //swrによりeventsを更新
+        mutate(TasksUrl)
+        //送信後にformを閉じる
+        props.setIsEventForm(false)
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+
   //target_dateにはDate Objecy
   //曜日を作成
   const day_label = (target_date) => {
@@ -116,7 +157,7 @@ export const PostFrom = (props) => {
       {!defaultEvent && (
         <form
           className={styles.form}
-          onSubmit={handleSubmit(EventSubmit)}
+          onSubmit={handleSubmit(TaskSubmit)}
         >
           <button className={styles.switch} onClick={() => { setDefaultEvent(true) }}>予定を登録</button>
           <button className={styles.button} onClick={() => { props.setIsEventForm(false) }}>✕</button>

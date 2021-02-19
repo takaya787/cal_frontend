@@ -3,8 +3,9 @@ import Calender from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import styles from './Main.module.css'
 //components
-import { EventFrom } from './Forms/EventForm'
+import { PostFrom } from './Forms/PostForm'
 import { EventList } from './Lists/EventList'
+import { TaskList } from './Lists/TaskList'
 //others
 
 export const Main = () => {
@@ -34,11 +35,14 @@ export const Main = () => {
         view={"month"}
       />
       {isEventForm && (
-        <EventFrom date={value} setIsEventForm={setIsEventForm} />
+        <PostFrom date={value} setIsEventForm={setIsEventForm} />
       )}
       <div className={styles.board}>
-        <div className={styles.left}>
+        <div className={styles.inline}>
           <EventList activeDate={activeDate} />
+        </div>
+        <div className={styles.inline}>
+          <TaskList activeDate={activeDate} />
         </div>
       </div>
     </>

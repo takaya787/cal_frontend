@@ -48,6 +48,21 @@
 .list_switch:hover{
   opacity: 1.0;
 }
+.delete_button {
+  float: right;
+  background-color: brown;
+  border: solid 1px wheat;
+  border-radius: 10px;
+  color: white;
+  opacity: 0.6;
+}
+.delete_button:focus{
+  outline: none;
+}
+.delete_button:hover{
+  opacity: 1.0;
+}
+
 .memo_title {
   margin-top: 20px;
 }
@@ -58,4 +73,8 @@
 }
 .longer {
   height: 140px;
+}
+
+.blue {
+  background-color: blue;
 }

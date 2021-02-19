@@ -33,7 +33,7 @@ export const EventList = (props) => {
       return `${styles.past}`
     }
     //year,month同じでもdateが小さい　過去
-    else if (today_year === target_year && today_month >= target_month) {
+    else if (today_year === target_year && today_month === target_month) {
       return today_date > target_date ? ` ${styles.past}` : 'normal'
     } else {
       return 'normal'
@@ -61,7 +61,7 @@ export const EventList = (props) => {
       <div className={styles.eventlist}>
         <ul className={styles.lists}>
           {actualEvents.map(event => (
-            <li key={event.id} className={list_class(today, event.date, event.month, event.year)}><EachList date={event.date} title={event.title} memo={event.memo} /></li>
+            <li key={event.id} className={list_class(today, event.date, event.month, event.year)}><EachList date={event.date} title={event.title} memo={event.memo} id={event.id} /></li>
           ))}
         </ul>
       </div>

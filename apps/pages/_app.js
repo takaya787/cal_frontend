@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import { useState, useEffect, createContext } from 'react';
+import { mutate } from 'swr'
 import Auth from '../modules/auth';
 //customhookをimport
 import { useEventsSWR, EventsUrl } from '../hooks/useEventsSWR'
@@ -59,23 +60,17 @@ function MyApp({ Component, pageProps }) {
     }
   }, []) // [] => changed to => [user]
 
-  //loginしていればそのユーザーのeventsを取得
-  // useEffect(function getEvents() {
-  //   //Loginしていなければeventsは無し
-  //   if (!Auth.isLoggedIn() || user.id === 0) {
-  //     return setEvents([])
-  //   }
-  //   fetch(EventsUrl, {
-  //     method: 'GET',
-  //     headers: {
-  //       'Authorization': `Bearer ${Auth.getToken()}`
-  //     }
-  //   }).then(res => res.json())
-  //     .then(data => {
-  //       console.log(data);
-  //       setEvents(data.events);
-  //     })
-  // }, [user])
+  //ユーザーが変われば情報をユーザーに関わる情報を再取得
+  useEffect(function updateInformation() {
+    if (Auth.isLoggedIn()) {
+      //events情報を更新
+      mutate(EventsUrl);
+      //tasks情報を更新
+      mutate(TasksUrl);
+    } else {
+      console.log('no user information')
+    }
+  }, [user])
 
   return (
     <UserContext.Provider value={Uservalue}>

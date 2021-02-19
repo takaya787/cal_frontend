@@ -14,6 +14,7 @@ export default function Home() {
   const handleLogout = () => {
     setUser({ email: '', id: 0, name: '' });
     Auth.logout();
+    console.log('You are logged out successfully')
   }
 
   return (

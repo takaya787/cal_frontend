@@ -2,13 +2,10 @@
   display: inline-block;
   width: 90%;
   margin-right: 10%;
-  max-height: 300px;
-  min-height: 75px;
   height: auto;
+  max-height: 300px;
   border: 1px solid brown;
   border-radius: 10px;
-  overflow-y: scroll;
-  position: relative;
 }
 
 .title {
@@ -20,6 +17,9 @@
 }
 .lists {
   height: auto;
+  max-height: 255px;
+  min-height: 20px;
+  overflow-y: scroll;
   padding: 0;
   margin: 0;
   display: flex;
@@ -27,12 +27,11 @@
   list-style: none;
 }
 .list_each {
-  height: 75px;
+  height: 65px;
   font-size: 16px;
-  padding-left: 5px;
-  padding: 10px 10%;
-  /* margin: 10px 15%; */
-  border-bottom: 1px solid black;
+  padding: 10px 10% 10px 5%;
+  /* margin: 10px 5%; */
+  border-top: 1px solid black;
   overflow: scroll;
 }
 .list_date {
@@ -83,12 +82,41 @@
 }
 
 /* taskのボタン部分css */
+.task_line {
+  float: left;
+  margin-right: 20px;
+  height: 45px;
+  width: 10px;
+  border-radius: 10px;
+  background-color: red;
+}
 .task_buttons {
   display: flex;
   flex-direction: row;
-  margin-right: 10%;
+  border-bottom: 1px solid red;
 }
 .task_button {
   width: 33%;
   margin: 10px;
+  padding: 5px 0;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  opacity: 0.6;
+}
+.task_button:focus {
+  outline: none;
+}
+.task_button:hover {
+  opacity: 1.0;
+}
+
+.green {
+  background-color: green;
+}
+.blue {
+  background-color: blue;
+}
+.red {
+  background-color: red;
 }

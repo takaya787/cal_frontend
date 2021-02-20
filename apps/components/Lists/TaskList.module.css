@@ -92,6 +92,7 @@
   border-radius: 5px;
   border: none;
   color: white;
+  opacity: 0.6;
 }
 .task_button:focus {
   outline: none;

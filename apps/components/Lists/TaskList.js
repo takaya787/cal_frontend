@@ -14,6 +14,9 @@ export const TaskList = (props) => {
   //taskのfilterを管理
   const [taskfilter, setTaskfilter] = useState('all');
 
+  //カレンダーの月から始まるtasksを選別する
+  const [currentTasks, setCurrentTasks] = useState([])
+
   //実際に表示するeventsを選定
   const [actualTasks, setActualTasks] = useState([])
 
@@ -43,7 +46,7 @@ export const TaskList = (props) => {
     }
   }
 
-  //表示するtasksを決定
+  //ここで、tasks_dataからカレンダーの月に該当するタスクを取得
   useEffect(function () {
     //tasks_dataに値がセットされていなければ、return
     if (tasks_data === undefined) {
@@ -53,27 +56,36 @@ export const TaskList = (props) => {
     }
 
     const tasks = tasks_data.tasks
-    const filteredtasks = tasks.filter((task) => {
+    const Current_Tasks = tasks.filter((task) => {
       return (task.month === active_month && task.year === active_year)
     })
-    setActualTasks(filteredtasks)
+    setCurrentTasks(Current_Tasks)
   }, [props.activeDate, tasks_data])
 
-  //表示するtasksを決定
-  // useEffect(function () {
-  //   //tasks_dataに値がセットされていなければ、return
-  //   if (tasks_data === undefined) {
-  //     return
-  //   } else if (!tasks_data.hasOwnProperty('tasks')) {
-  //     return
-  //   }
-
-  //   const tasks = tasks_data.tasks
-  //   const filteredtasks = tasks.filter((task) => {
-  //     return (task.month === active_month && task.year === active_year)
-  //   })
-  //   setActualTasks(filteredtasks)
-  // }, [props.activeDate, tasks_data])
+  // currentTasksから実際に表示するタスクを選択
+  useEffect(function () {
+    //currentTasksに値がセットされていなければ、return
+    if (currentTasks.length === 0) {
+      setActualTasks([])
+    }
+    let Filtered_Tasks = []
+    switch (taskfilter) {
+      case "TASKS":
+        Filtered_Tasks = currentTasks.filter((task) => {
+          return (task.completed === false)
+        })
+        break;
+      case "COMPLETED":
+        Filtered_Tasks = currentTasks.filter((task) => {
+          return (task.completed === true)
+        })
+        break;
+      default:
+        Filtered_Tasks = currentTasks
+        break;
+    }
+    setActualTasks(Filtered_Tasks)
+  }, [currentTasks, taskfilter])
 
 
 
@@ -83,9 +95,9 @@ export const TaskList = (props) => {
       <div className={styles.eventlist}>
         <div className={styles.task_buttons}
         >
-          <button className={`${styles.task_button} ${styles.green}`}>All</button>
-          <button className={`${styles.task_button} ${styles.red}`}>Tasks</button>
-          <button className={`${styles.task_button} ${styles.blue}`}>Completed</button>
+          <button className={`${styles.task_button} ${styles.green}`} onClick={() => setTaskfilter("ALL")}>All</button>
+          <button className={`${styles.task_button} ${styles.red}`} onClick={() => setTaskfilter("TASKS")}>Tasks</button>
+          <button className={`${styles.task_button} ${styles.blue}`} onClick={() => setTaskfilter("COMPLETED")}>Completed</button>
         </div>
         <ul className={styles.lists}>
           {actualTasks.map(task => (

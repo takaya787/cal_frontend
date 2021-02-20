@@ -29,7 +29,7 @@ export const EachTask = (props) => {
   async function DeleteTask(id) {
     const delete_url = `${TasksUrl}/${id}`
     const res = await fetch(delete_url, {
-      method: 'DELETE', // or 'PUT'
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${Auth.getToken()}`
@@ -50,7 +50,34 @@ export const EachTask = (props) => {
         console.log(err);
       })
   }
-  //completed: boolean
+
+  // taskを変更する一連の関数 promiseを返す
+  async function ChangeTask(id) {
+    const target_url = `${TasksUrl}/change/${id}`
+    const res = await fetch(target_url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${Auth.getToken()}`
+      }
+    })
+    const data = await res.json();
+    return data;
+  }
+
+  //taskの切り替えボタンの関数 id: integer
+  const handleChange = (id) => {
+    ChangeTask(id)
+      .then(data => {
+        // console.log(data);
+        mutate(TasksUrl);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  //taskバーの表示を簡略化  completed: boolean
   const task_line = (completed) => {
     if (completed) {
       return (<div className={`${styles.task_line} ${styles.blue}`}></div>)
@@ -65,6 +92,7 @@ export const EachTask = (props) => {
       <span className={styles.list_date}>{props.date}日</span>
       <button className={switch_style()} onClick={() => setShowMemo(!showMemo)}>{switch_title()}</button>
       <button className={styles.delete_button} onClick={() => handleDelete(props.id)}>削除</button>
+      <button className={styles.change_button} onClick={() => handleChange(props.id)}>切り替え</button>
       <br />{props.title}
       <br />
 

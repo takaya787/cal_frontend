@@ -50,9 +50,18 @@ export const EachTask = (props) => {
         console.log(err);
       })
   }
+  //completed: boolean
+  const task_line = (completed) => {
+    if (completed) {
+      return (<div className={`${styles.task_line} ${styles.blue}`}></div>)
+    } else {
+      return (<div className={`${styles.task_line} ${styles.red}`}></div>)
+    }
+  }
 
   return (
     <div className={each_style()}>
+      {task_line(props.completed)}
       <span className={styles.list_date}>{props.date}日</span>
       <button className={switch_style()} onClick={() => setShowMemo(!showMemo)}>{switch_title()}</button>
       <button className={styles.delete_button} onClick={() => handleDelete(props.id)}>削除</button>

@@ -13,13 +13,11 @@
   width: 80%;
   margin: 20px auto 0;
   height: 350px;
-  display: block;
+  display: flex;
+  flex-direction: row;
 }
-.left {
+.inline {
+  display: inline-block;
+  width: 50%;
   text-align: left;
-  width: 50%;
-}
-.right {
-  text-align: right;
-  width: 50%;
 }

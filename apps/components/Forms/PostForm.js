@@ -24,6 +24,9 @@ export const PostFrom = (props) => {
 
   //Event投稿関数
   const EventSubmit = (value) => {
+    if (!Auth.isLoggedIn()) {
+      return alert('loginしてください')
+    }
     // console.log(value);
     // console.log(props.date);
     fetch(EventsUrl, {
@@ -58,6 +61,9 @@ export const PostFrom = (props) => {
 
   //Task投稿関数
   const TaskSubmit = (value) => {
+    if (!Auth.isLoggedIn()) {
+      return alert('loginしてください')
+    }
     // console.log(value);
     // console.log(props.date);
     fetch(TasksUrl, {

@@ -89,19 +89,21 @@ export const EachTask = (props) => {
   return (
     <div className={each_style()}>
       {task_line(props.completed)}
-      <span className={styles.list_date}>{props.date}日</span>
-      <button className={switch_style()} onClick={() => setShowMemo(!showMemo)}>{switch_title()}</button>
-      <button className={styles.delete_button} onClick={() => handleDelete(props.id)}>削除</button>
-      <button className={styles.change_button} onClick={() => handleChange(props.id)}>切り替え</button>
-      <br />{props.title}
-      <br />
-
-      {showMemo && (
-        <>
-          <h3 className={styles.memo_title}>メモ内容</h3>
-          <p>{props.memo}</p>
-        </>
-      )}
+      {/* <button className={styles.change_button} onClick={() => handleChange(props.id)}>切り替え</button> */}
+      <div>
+        <span className={styles.list_date}>{props.date}日</span>
+        <button className={switch_style()} onClick={() => setShowMemo(!showMemo)}>{switch_title()}</button>
+        <button className={styles.change_button} onClick={() => handleChange(props.id)}>切り替え</button>
+        <button className={styles.delete_button} onClick={() => handleDelete(props.id)}>削除</button>
+        <br />{props.title}
+        <br />
+        {showMemo && (
+          <div className={styles.memo}>
+            <h3>メモ内容</h3>
+            <p>{props.memo}</p>
+          </div>
+        )}
+      </div>
     </div>
   )
 }

@@ -29,16 +29,21 @@
 .list_each {
   height: 65px;
   font-size: 16px;
-  padding: 10px 10% 10px 5%;
+  padding: 10px 5%;
   /* margin: 10px 5%; */
   border-top: 1px solid black;
   overflow: scroll;
 }
+/* listの内容を含む親class */
+/* .list_content {
+  display: inline-block;
+} */
 .list_date {
-  margin-right: 20px;
+  margin-right: 10px;
 }
 .list_switch {
   background-color: red;
+  margin-right: 10px;
   border: solid 1px wheat;
   border-radius: 10px;
   color: white;
@@ -65,8 +70,9 @@
   opacity: 1.0;
 }
 
-.memo_title {
-  margin-top: 20px;
+.memo {
+  padding-left: 10px;
+  margin-top: 10px;
 }
 
 .past {
@@ -84,7 +90,7 @@
 /* taskのボタン部分css */
 .task_line {
   float: left;
-  margin-right: 20px;
+  margin-right: 10px;
   height: 45px;
   width: 10px;
   border-radius: 10px;
@@ -110,7 +116,19 @@
 .task_button:hover {
   opacity: 1.0;
 }
-
+.change_button {
+  background-color: purple;
+  border: solid 1px wheat;
+  border-radius: 10px;
+  color: white;
+  opacity: 0.6;
+}
+.change_button:focus {
+  outline: none;
+}
+.change_button:hover {
+  opacity: 1.0;
+}
 .green {
   background-color: green;
 }

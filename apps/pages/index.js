@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Calender App</title>
+        <title>Your Schedule</title>
       </Head>
       <h1>カレンダーでスケジュール管理！</h1>
       {!Auth.isLoggedIn() && (

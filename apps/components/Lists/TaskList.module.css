@@ -32,6 +32,7 @@
   padding: 10px 5%;
   /* margin: 10px 5%; */
   border-top: 1px solid black;
+  /* overflowいらんかも */
   overflow: scroll;
 }
 /* listの内容を含む親class */

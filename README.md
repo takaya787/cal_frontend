@@ -1,34 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Your Schedule
+[ページはこちら](https://cal-frontend.vercel.app/)
 
-## Getting Started
+こちらはNext.jsによるフロントエンド側のAppレポジトリーです。
+**バックエンド**側のRails API側のレポジトリーは[こちら](https://github.com/takaya787/cal_backend)
 
-First, run the development server:
+## サイト概要
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+**Your Schedule**はあなたのスケジュール管理をウェブ上に作成できます。<br>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 作成理由　
+従来のカレンダーと共に予定を管理すること同時に、タスク管理もできるようにしたかった。
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## 使用技術
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+* Ruby 2.7.2, Rails 6.0.3
+* React
+* Next.js
+* Docker, Docker-compose (開発環境)
+* Postgresql(DB)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+## 機能一覧
+**【機能一覧】**
 
-To learn more about Next.js, take a look at the following resources:
+◆　ユーザー機能 
+* 新規登録、ログアウト
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+◆　イベント機能 
+* イベントの新規作成、削除
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+◆　タスク機能
+* タスクの新規作成、削除
+* タスクの完了済みかどうかを記録
+* タスクの状態毎に表示を変える
 
-## Deploy on Vercel
+## こだわった点
+### 今回特にこだわった点は**非同期通信の快適さ**です。
+各userの作成したイベント情報、タスク情報は全てbackend側のデータベースに保存され、それらのデータをclient側で取得して、表示させています。
+僕が特にこだわった点は、ユーザーの行った変更がすぐにユーザーに見える形で適用されることです。
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 非同期通信にSWRを使用
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+いくつかの異なるcomponentsで、非同期通信の情報をラグが少なく共有するための手段として、**SWR**を使用しています。
+**SWR**は情報の共有、更新を一括で管理する事ができるので、
+今回のサイトでは、投稿の**作成、削除**、タスクに関しては**完了情報の変更**まで、データベースの変更を時差なくclient側に表示できるようにしています。
+
+### SWRのメリット
+
+reduxとredux-sagaでの状態共有と比べて、圧倒的に簡単に共有でき、またデータの更新も関数一つで行える点は非常に便利です。

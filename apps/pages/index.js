@@ -20,9 +20,11 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta charSet="UTF-8" />
         <title>Your Schedule</title>
       </Head>
-      <h1>カレンダーでスケジュール管理！</h1>
+      <h1 className={styles.title}>カレンダーでスケジュール管理！</h1>
       {!Auth.isLoggedIn() && (
         <Modal />
       )}

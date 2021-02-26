@@ -30,3 +30,22 @@
   width: 50%;
   text-align: left;
 }
+
+/* responsive design  */
+@media screen and ( max-width: 767px ){
+  .main {
+    width: 95%;
+  }
+
+  .board{
+    width: 95%;
+    display: block;
+    height: auto;
+  }
+  .inline {
+    display: block;
+    text-align: center;
+    width: 90%;
+    margin: 10px auto;
+  }
+}

@@ -1,9 +1,9 @@
 .eventlist {
   display: inline-block;
   width: 90%;
-  margin-right: 10%;
+  margin: 0 5%;
   height: auto;
-  max-height: 300px;
+  /* max-height: 350px; */
   border: 1px solid brown;
   border-radius: 10px;
 }
@@ -17,7 +17,7 @@
 }
 .lists {
   height: auto;
-  max-height: 255px;
+  max-height: 305px;
   min-height: 20px;
   overflow-y: scroll;
   padding: 0;
@@ -27,13 +27,12 @@
   list-style: none;
 }
 .list_each {
-  height: 65px;
+  height: 75px;
   font-size: 16px;
-  padding: 10px 5%;
+  padding: 10px 5% 10px;
   /* margin: 10px 5%; */
   border-top: 1px solid black;
-  /* overflowいらんかも */
-  overflow: scroll;
+  overflow-y: scroll;
 }
 /* listの内容を含む親class */
 /* .list_content {

@@ -114,6 +114,10 @@
   outline: none;
 }
 .task_button:hover {
+  opacity: 0.9;
+}
+.task_button_selected {
+  font-weight: bold;
   opacity: 1.0;
 }
 .change_button {

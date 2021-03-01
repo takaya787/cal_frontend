@@ -12,7 +12,7 @@ export const TaskList = (props) => {
   const { tasks_data } = useContext(TasksContext);
 
   //taskのfilterを管理
-  const [taskfilter, setTaskfilter] = useState('all');
+  const [taskfilter, setTaskfilter] = useState('ALL');
 
   //カレンダーの月から始まるtasksを選別する
   const [currentTasks, setCurrentTasks] = useState([])
@@ -88,6 +88,13 @@ export const TaskList = (props) => {
   }, [currentTasks, taskfilter])
 
 
+  const button_selected = (name) => {
+    if (taskfilter === name) {
+      return (styles.task_button_selected)
+    } else {
+      return ""
+    }
+  }
 
   return (
     <>
@@ -95,9 +102,9 @@ export const TaskList = (props) => {
       <div className={styles.eventlist}>
         <div className={styles.task_buttons}
         >
-          <button className={`${styles.task_button} ${styles.green}`} onClick={() => setTaskfilter("ALL")}>All</button>
-          <button className={`${styles.task_button} ${styles.red}`} onClick={() => setTaskfilter("TASKS")}>Tasks</button>
-          <button className={`${styles.task_button} ${styles.blue}`} onClick={() => setTaskfilter("COMPLETED")}>Completed</button>
+          <button className={`${styles.task_button} ${styles.green} ${button_selected("ALL")}`} onClick={() => setTaskfilter("ALL")}>All</button>
+          <button className={`${styles.task_button} ${styles.red} ${button_selected("TASKS")}`} onClick={() => setTaskfilter("TASKS")}>Tasks</button>
+          <button className={`${styles.task_button} ${styles.blue} ${button_selected("COMPLETED")}`} onClick={() => setTaskfilter("COMPLETED")}>Completed</button>
         </div>
         <ul className={styles.lists}>
           {actualTasks.map(task => (
